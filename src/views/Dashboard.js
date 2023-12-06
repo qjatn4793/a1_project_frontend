@@ -27,6 +27,12 @@ function Dashboard() {
     }
   }, [selectedItem]);
 
+  // searchTerm이 변경될 때 itemDetails 초기화
+  useEffect(() => {
+    setItemDetails(null);
+    setFilteredData([]);
+  }, [searchTerm]);
+
   const fetchData = () => {
     axios.get("http://localhost:8080/api/search")
       .then((response) => {
@@ -66,6 +72,12 @@ function Dashboard() {
   const handleResultClick = (item) => {
     setSelectedItem(item);
   };
+  
+  useEffect(() => {
+    if (selectedItem) {
+      fetchItemDetails(selectedItem);
+    }
+  }, [selectedItem]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -113,10 +125,18 @@ function Dashboard() {
             </tbody>
           </Table>
           {itemDetails && (
-            <div>
-              <h2>Item Details</h2>
-              {/* Display itemDetails here */}
-            </div>
+            <Table>
+              <thead>
+                <tr>
+                  <th>Item Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                    <td>{itemDetails}</td>
+                  </tr>
+              </tbody>
+            </Table>
           )}
         </div>
       </div>
