@@ -76,6 +76,10 @@ function Admin(props) {
             path="/"
             element={<Navigate to="/dashboard" replace />}
           />
+          <Route
+            path="/searchResult"
+            element={<Navigate to="/searchResult" replace />}
+          />
         </Routes>
         {/* <Footer fluid /> */}
       </div>

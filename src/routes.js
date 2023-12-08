@@ -16,6 +16,7 @@
 
 */
 import Dashboard from "views/Dashboard.js";
+import SearchResult from "views/SearchResult.js";
 import Notifications from "views/Notifications.js";
 import Icons from "views/Icons.js";
 import Typography from "views/Typography.js";
@@ -30,6 +31,13 @@ var dashRoutes = [
     name: "Dashboard",
     icon: "design_app",
     component: <Dashboard />,
+    layout: "/admin",
+  },
+  {
+    path: "/searchResult",
+    name: "Search Result",
+    icon: "nc-icon nc-zoom-split",
+    component: <SearchResult />,
     layout: "/admin",
   },
   {
