@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   Input,
   InputGroup,
   InputGroupAddon,
   InputGroupText,
   Table,
-  Form
+  Form,
+  Container,
+  Row,
+  Col
 } from "reactstrap";
 
 function Dashboard() {
@@ -32,6 +35,7 @@ function Dashboard() {
   useEffect(() => {
     setItemDetails(null);
     setFilteredData([]);
+    handleSearch();
   }, [searchTerm]);
 
   const fetchData = () => {
@@ -116,17 +120,22 @@ function Dashboard() {
     e.target.style.backgroundColor = 'white';
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    handleFileUpload(file);
+  };
+
   return (
-    <>
-      <div className="content d-flex justify-content-center align-items-center">
-        <div>
+    <Container style={{ marginTop: '15%'}}>
+      <Row className="justify-content-center align-items-center">
+        <Col md="6">
           <a href="/" className="d-flex justify-content-center align-items-center">
             <h1>A1</h1>
           </a>
           <Form onSubmit={handleSubmit}>
-            <InputGroup className="no-border" style={{ width: '500px' }}>
+            <InputGroup className="no-border">
               <Input
-                placeholder="검색 또는 파일을 여기로 드래그하세요..."
+                placeholder="검색 또는 파일을 여기로 업로드하세요..."
                 style={{ backgroundColor: 'white' }}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -137,31 +146,46 @@ function Dashboard() {
               />
               <InputGroupAddon addonType="append">
                 <InputGroupText
-                  style={{ backgroundColor: 'white', cursor: 'pointer' }}
+                  style={{ backgroundColor: 'white'}}
                   onClick={handleSearch}
                 >
-                  <i
-                    className="now-ui-icons ui-1_zoom-bold"
-                    style={{ transition: 'color 0.3s' }}
+                  <label style={{ margin: 0, cursor: 'pointer' }}>
+                    <i className="now-ui-icons ui-1_zoom-bold"/>
+                  </label>
+                </InputGroupText>
+                <InputGroupText style={{ backgroundColor: 'white'}}>
+                  <label htmlFor="fileInput" style={{ margin: 0, cursor: 'pointer' }}>
+                    <i className="now-ui-icons files_single-copy-04" />
+                  </label>
+                  <input
+                    id="fileInput"
+                    type="file"
+                    accept=".txt,.pdf,.doc,.docx"
+                    style={{ display: 'none' }}
+                    onChange={handleFileChange}
                   />
                 </InputGroupText>
               </InputGroupAddon>
             </InputGroup>
           </Form>
-          <Table>
-            <thead>
-              <tr>
-                <th>Results</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredData.map((item, index) => (
-                <tr style={{ cursor: 'pointer' }} key={index} onClick={() => handleResultClick(item)}>
-                  <td>{item}</td>
+          {filteredData.length === 0 ? (
+            <p>검색 결과가 없습니다.</p>
+          ) : (
+            <Table>
+              <thead>
+                <tr>
+                  <th>Results</th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
+              </thead>
+              <tbody>
+                {filteredData.map((item, index) => (
+                  <tr style={{ cursor: 'pointer' }} key={index} onClick={() => handleResultClick(item)}>
+                    <td>{item}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          )}
           {itemDetails && (
             <Table>
               <thead>
@@ -177,9 +201,9 @@ function Dashboard() {
               </tbody>
             </Table>
           )}
-        </div>
-      </div>
-    </>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
