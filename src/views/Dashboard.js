@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import useDashboard from './useDashboard';
 import {
   Input,
   InputGroup,
@@ -10,15 +11,20 @@ import {
   Form,
   Container,
   Row,
-  Col
+  Col,
+  Button
 } from "reactstrap";
 
 function Dashboard() {
+  const { getGptAnswerApi } = useDashboard();
+
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const [yourData, setYourData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [itemDetails, setItemDetails] = useState(null);
+  const [content, setContent] = useState("");
+  const [gptResult, setGptResult] = useState("");
   const [uploadedFile, setUploadedFile] = useState(null);
 
   useEffect(() => {
@@ -56,6 +62,12 @@ function Dashboard() {
       .catch((error) => {
         console.error("Error fetching item details:", error);
       });
+  };
+
+  // chatGpt 검색
+  const getGptAnswer = async () => {
+    const res = await getGptAnswerApi({content: content});
+    setGptResult(res);
   };
 
   const handleSearch = () => {
@@ -201,6 +213,20 @@ function Dashboard() {
               </tbody>
             </Table>
           )}
+          <InputGroup>
+              <Input
+                  placeholder="챗 지피티..."
+                  onChange={(e) => setContent(e.target.value)}
+                  style={{ backgroundColor: 'white' }}
+                  value={content}
+              />
+              <Button
+                onClick={getGptAnswer}
+              >
+                검색
+              </Button>
+            </InputGroup>
+            <Input type="textarea" name="text" id="exampleText" value={gptResult || ""}/>
         </Col>
       </Row>
     </Container>
