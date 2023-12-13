@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import useDashboard from './useDashboard';
+import { A1_API_URL } from '../libs/Constants';
 import {
   Input,
   InputGroup,
@@ -45,7 +46,7 @@ function Dashboard() {
   }, [searchTerm]);
 
   const fetchData = () => {
-    axios.get("http://localhost:8080/api/search")
+    axios.get(A1_API_URL + `/api/search`)
       .then((response) => {
         setYourData(response.data);
       })
@@ -55,7 +56,7 @@ function Dashboard() {
   };
 
   const fetchItemDetails = (selectedItem) => {
-    axios.get(`http://localhost:8080/api/searchItem?item=${selectedItem}`)
+    axios.get(A1_API_URL + `/api/searchItem?item=${selectedItem}`)
       .then((response) => {
         setItemDetails(response.data);
       })
@@ -99,7 +100,7 @@ function Dashboard() {
     formData.append('file', file);
   
     // 서버에 POST 요청 보내기
-    axios.post('http://localhost:8080/api/searchItem', formData)
+    axios.post(A1_API_URL + `/api/searchItem`, formData)
       .then((response) => {
         console.log('서버 응답:', response.data);
   
@@ -213,7 +214,7 @@ function Dashboard() {
               </tbody>
             </Table>
           )}
-          <InputGroup>
+          <InputGroup >
               <Input
                   placeholder="챗 지피티..."
                   onChange={(e) => setContent(e.target.value)}
