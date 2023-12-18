@@ -105,7 +105,7 @@ function SearchResult() {
                 <div className="content">
                     <NotificationAlert ref={notificationAlert} />
                     <Row>
-                        <Col md={6} xs={12}>
+                        <Col md={6} xs={12} id="left-col">
                             <Card>
                                 <CardHeader>
                                     <CardTitle tag="h4">핵심 키워드</CardTitle>
@@ -114,81 +114,6 @@ function SearchResult() {
                                     <WordCloudComponent words={words} />
                                 </CardBody>
                             </Card>
-                        </Col>
-                        <Col md={6} xs={12}>
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle tag="h4">주요 뉴스 기사</CardTitle>
-                                </CardHeader>
-                                <CardBody>
-                                    <Alert color="primary">
-                                        <Row className="d-flex align-items-center">
-                                            <span>
-                                                <b>농협</b>경제지주, 김장나눔 9000포기 전달
-                                            </span>
-                                            <Col md={3} xs={12} className="ml-auto">
-                                                <Button
-                                                    color="primary"
-                                                    block
-                                                    onClick={() => golink("http://www.edaily.co.kr/news/newspath.asp?newsid=03483366635836224")}
-                                                >
-                                                    기사 보러가기
-                                                </Button>
-                                            </Col>
-                                        </Row>
-                                    </Alert>
-                                    <Alert color="info">
-                                        <Row className="d-flex align-items-center">
-                                            <span>
-                                                <b>농협</b>, 럼피스킨 확산 방지 '깨끗한 농장 가꾸기 캠페인'
-                                            </span>
-                                            <Col md={3} xs={12} className="ml-auto">
-                                                <Button
-                                                    color="info"
-                                                    block
-                                                    onClick={() => golink("https://www.yna.co.kr/view/AKR20231207109700062?input=1195m")}
-                                                >
-                                                    기사 보러가기
-                                                </Button>
-                                            </Col>
-                                        </Row>
-                                    </Alert>
-                                    <Alert color="success">
-                                        <Row className="d-flex align-items-center">
-                                            <span>
-                                                한수원-NH<b>농협</b>금융지주, 탄소중립 경제 구축
-                                            </span>
-                                            <Col md={3} xs={12} className="ml-auto">
-                                                <Button
-                                                    color="success"
-                                                    block
-                                                    onClick={() => golink("https://zdnet.co.kr/view/?no=20231207130557")}
-                                                >
-                                                    기사 보러가기
-                                                </Button>
-                                            </Col>
-                                        </Row>
-                                    </Alert>
-                                    <Alert color="warning">
-                                        <Row className="d-flex align-items-center">
-                                            <span>
-                                                <b>농협</b> 강원본부, 럼피스킨 확산 방지 ‘깨끗한 축산농장 가꾸기’ 캠페인
-                                            </span>
-                                            <Col md={3} xs={12} className="ml-auto">
-                                                <Button
-                                                    color="warning"
-                                                    block
-                                                    onClick={() => golink("https://www.news1.kr/articles/5254422")}
-                                                >
-                                                    기사 보러가기
-                                                </Button>
-                                            </Col>
-                                        </Row>
-                                    </Alert>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                        <Col md={12} xs={12}>
                             <Card>
                                 <CardBody>
                                     <div className="places-buttons">
@@ -266,6 +191,111 @@ function SearchResult() {
                                             </Col>
                                         </Row>
                                     </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                        <Col md={6} xs={12} id="right-col">
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle tag="h4">주요 뉴스 기사</CardTitle>
+                                </CardHeader>
+                                <CardBody>
+                                    <Alert color="primary">
+                                        <Row className="d-flex align-items-center">
+                                            <span>
+                                                <b>농협</b>경제지주, 김장나눔 9000포기 전달
+                                            </span>
+                                            <Col md={3} xs={12} className="ml-auto">
+                                                <Button
+                                                    color="primary"
+                                                    block
+                                                    onClick={() => golink("http://www.edaily.co.kr/news/newspath.asp?newsid=03483366635836224")}
+                                                >
+                                                    기사 보러가기
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Alert>
+                                    <Alert color="info">
+                                        <Row className="d-flex align-items-center">
+                                            <span>
+                                                <b>농협</b>, 럼피스킨 확산 방지 '깨끗한 농장 가꾸기 캠페인'
+                                            </span>
+                                            <Col md={3} xs={12} className="ml-auto">
+                                                <Button
+                                                    color="info"
+                                                    block
+                                                    onClick={() => golink("https://www.yna.co.kr/view/AKR20231207109700062?input=1195m")}
+                                                >
+                                                    기사 보러가기
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Alert>
+                                    <Alert color="success">
+                                        <Row className="d-flex align-items-center">
+                                            <span>
+                                                한수원-NH<b>농협</b>금융지주, 탄소중립 경제 구축
+                                            </span>
+                                            <Col md={3} xs={12} className="ml-auto">
+                                                <Button
+                                                    color="success"
+                                                    block
+                                                    onClick={() => golink("https://zdnet.co.kr/view/?no=20231207130557")}
+                                                >
+                                                    기사 보러가기
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Alert>
+                                    <Alert color="warning">
+                                        <Row className="d-flex align-items-center">
+                                            <span>
+                                                <b>농협</b> 강원본부, 럼피스킨 확산 방지 ‘깨끗한 축산농장 가꾸기’ 캠페인
+                                            </span>
+                                            <Col md={3} xs={12} className="ml-auto">
+                                                <Button
+                                                    color="warning"
+                                                    block
+                                                    onClick={() => golink("https://www.news1.kr/articles/5254422")}
+                                                >
+                                                    기사 보러가기
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Alert>
+                                    <Alert color="primary">
+                                        <Row className="d-flex align-items-center">
+                                            <span>
+                                                <b>농협</b> 강원본부, 럼피스킨 확산 방지 ‘깨끗한 축산농장 가꾸기’ 캠페인
+                                            </span>
+                                            <Col md={3} xs={12} className="ml-auto">
+                                                <Button
+                                                    color="primary"
+                                                    block
+                                                    onClick={() => golink("https://www.news1.kr/articles/5254422")}
+                                                >
+                                                    기사 보러가기
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Alert>
+                                    <Alert color="info">
+                                        <Row className="d-flex align-items-center">
+                                            <span>
+                                                <b>농협</b> 강원본부, 럼피스킨 확산 방지 ‘깨끗한 축산농장 가꾸기’ 캠페인
+                                            </span>
+                                            <Col md={3} xs={12} className="ml-auto">
+                                                <Button
+                                                    color="info"
+                                                    block
+                                                    onClick={() => golink("https://www.news1.kr/articles/5254422")}
+                                                >
+                                                    기사 보러가기
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Alert>
                                 </CardBody>
                             </Card>
                         </Col>

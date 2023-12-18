@@ -143,7 +143,7 @@ function Dashboard() {
       <Row className="justify-content-center align-items-center">
         <Col md="6">
           <a href="/" style={{color:'white'}} className="d-flex justify-content-center align-items-center">
-            <h1>Assistance 1step</h1>
+            <h1><b>Assistance 1step</b></h1>
           </a>
           <Form onSubmit={handleSubmit}>
             <InputGroup className="no-border">
@@ -208,8 +208,10 @@ function Dashboard() {
               </thead>
               <tbody>
                 <tr>
-                  <td>{itemDetails}</td>
-                  <td style={{textAlign : "right"}}><Link to="/searchResult" style={{color : "black"}}>확인</Link></td>
+                  <td>results : {itemDetails}</td>
+                  <td style={{textAlign : "right"}}>
+                    <Link to={`/searchResult?item=${itemDetails}`} style={{color : "black"}}>검색 결과 확인</Link>
+                  </td>
                 </tr>
               </tbody>
             </Table>
