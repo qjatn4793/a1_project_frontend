@@ -67,7 +67,7 @@ function Dashboard() {
 
   // chatGpt 검색
   const getGptAnswer = async () => {
-    const res = await getGptAnswerApi({content: content});
+    const res = await getGptAnswerApi({ content: content });
     setGptResult(res);
   };
 
@@ -94,16 +94,16 @@ function Dashboard() {
   const handleFileUpload = (file) => {
     // 파일 업로드 로직을 수행
     setUploadedFile(file);
-  
+
     // 서버에 파일 업로드를 위한 FormData 생성
     const formData = new FormData();
     formData.append('file', file);
-  
+
     // 서버에 POST 요청 보내기
     axios.post(A1_API_URL + `/api/searchItem`, formData)
       .then((response) => {
         console.log('서버 응답:', response.data);
-  
+
         setItemDetails(response.data);
       })
       .catch((error) => {
@@ -139,16 +139,16 @@ function Dashboard() {
   };
 
   return (
-    <Container style={{ marginTop: '15%'}}>
+    <Container style={{ marginTop: '15%' }}>
       <Row className="justify-content-center align-items-center">
         <Col md="6">
-          <a href="/" className="d-flex justify-content-center align-items-center">
-            <h1>A1</h1>
+          <a href="/" style={{color:'white'}} className="d-flex justify-content-center align-items-center">
+            <h1>Assistance 1step</h1>
           </a>
           <Form onSubmit={handleSubmit}>
             <InputGroup className="no-border">
               <Input
-                placeholder="검색 또는 파일을 여기로 업로드하세요..."
+                placeholder="🏢 검색 또는 파일을 여기로 업로드하세요..."
                 style={{ backgroundColor: 'white' }}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -159,14 +159,14 @@ function Dashboard() {
               />
               <InputGroupAddon addonType="append">
                 <InputGroupText
-                  style={{ backgroundColor: 'white'}}
+                  style={{ backgroundColor: 'white' }}
                   onClick={handleSearch}
                 >
                   <label style={{ margin: 0, cursor: 'pointer' }}>
-                    <i className="now-ui-icons ui-1_zoom-bold"/>
+                    <i className="now-ui-icons ui-1_zoom-bold" />
                   </label>
                 </InputGroupText>
-                <InputGroupText style={{ backgroundColor: 'white'}}>
+                <InputGroupText style={{ backgroundColor: 'white' }}>
                   <label htmlFor="fileInput" style={{ margin: 0, cursor: 'pointer' }}>
                     <i className="now-ui-icons files_single-copy-04" />
                   </label>
@@ -209,25 +209,26 @@ function Dashboard() {
               <tbody>
                 <tr>
                   <td>{itemDetails}</td>
-                  <td><Link to="/searchResult">확인</Link></td>
+                  <td style={{textAlign : "right"}}><Link to="/searchResult" style={{color : "black"}}>확인</Link></td>
                 </tr>
               </tbody>
             </Table>
           )}
-          <InputGroup >
-              <Input
-                  placeholder="챗 지피티..."
-                  onChange={(e) => setContent(e.target.value)}
-                  style={{ backgroundColor: 'white' }}
-                  value={content}
-              />
-              <Button
-                onClick={getGptAnswer}
-              >
-                검색
-              </Button>
-            </InputGroup>
-            <Input type="textarea" name="text" id="exampleText" value={gptResult || ""}/>
+          
+          {/* <InputGroup>
+            <Input
+              placeholder="챗 지피티..."
+              onChange={(e) => setContent(e.target.value)}
+              style={{ backgroundColor: 'white' }}
+              value={content}
+            />
+            <Button
+              onClick={getGptAnswer}
+            >
+              검색
+            </Button>
+          </InputGroup>
+          <Input type="textarea" name="text" id="exampleText" value={gptResult || ""} /> */}
         </Col>
       </Row>
     </Container>

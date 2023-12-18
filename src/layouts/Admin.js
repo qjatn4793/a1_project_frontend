@@ -59,7 +59,7 @@ function Admin(props) {
   return (
     <div className="wrapper">
       {/* <Sidebar {...props} routes={routes} backgroundColor={backgroundColor} /> */}
-      <div className="main-panel" ref={mainPanel}>
+      <div className="main-panel" style={{backgroundColor : '#f96332'}} ref={mainPanel}>
         {/* <DemoNavbar {...props} /> */}
         <Routes>
           {routes.map((prop, key) => {

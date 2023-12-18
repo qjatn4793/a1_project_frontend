@@ -94,181 +94,183 @@ function SearchResult() {
     };
     return (
         <>
-            <PanelHeader
-                content={
-                    <div className="header text-center">
-                        <h2 className="title">searchResult</h2>
-                    </div>
-                }
-            />
-            <div className="content">
-                <NotificationAlert ref={notificationAlert} />
-                <Row>
-                    <Col md={6} xs={12}>
-                        <Card>
-                            <CardHeader>
-                                <CardTitle tag="h4">핵심 키워드</CardTitle>
-                            </CardHeader>
-                            <CardBody>
-                                <WordCloudComponent words={words} />
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col md={6} xs={12}>
-                        <Card>
-                            <CardHeader>
-                                <CardTitle tag="h4">주요 뉴스 기사</CardTitle>
-                            </CardHeader>
-                            <CardBody>
-                                <Alert color="primary">
-                                    <Row className="d-flex align-items-center">
-                                        <span>
-                                            <b>농협</b>경제지주, 김장나눔 9000포기 전달
-                                        </span>
-                                        <Col md={3} xs={12} className="ml-auto">
-                                            <Button
-                                                color="primary"
-                                                block
-                                                onClick={() => golink("http://www.edaily.co.kr/news/newspath.asp?newsid=03483366635836224")}
-                                            >
-                                                기사 보러가기
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </Alert>
-                                <Alert color="info">
-                                    <Row className="d-flex align-items-center">
-                                        <span>
-                                            <b>농협</b>, 럼피스킨 확산 방지 '깨끗한 농장 가꾸기 캠페인'
-                                        </span>
-                                        <Col md={3} xs={12} className="ml-auto">
-                                            <Button
-                                                color="info"
-                                                block
-                                                onClick={() => golink("https://www.yna.co.kr/view/AKR20231207109700062?input=1195m")}
-                                            >
-                                                기사 보러가기
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </Alert>
-                                <Alert color="success">
-                                    <Row className="d-flex align-items-center">
-                                        <span>
-                                            한수원-NH<b>농협</b>금융지주, 탄소중립 경제 구축
-                                        </span>
-                                        <Col md={3} xs={12} className="ml-auto">
-                                            <Button
-                                                color="success"
-                                                block
-                                                onClick={() => golink("https://zdnet.co.kr/view/?no=20231207130557")}
-                                            >
-                                                기사 보러가기
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </Alert>
-                                <Alert color="warning">
-                                    <Row className="d-flex align-items-center">
-                                        <span>
-                                            <b>농협</b> 강원본부, 럼피스킨 확산 방지 ‘깨끗한 축산농장 가꾸기’ 캠페인
-                                        </span>
-                                        <Col md={3} xs={12} className="ml-auto">
-                                            <Button
-                                                color="warning"
-                                                block
-                                                onClick={() => golink("https://www.news1.kr/articles/5254422")}
-                                            >
-                                                기사 보러가기
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </Alert>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col md={12} xs={12}>
-                        <Card>
-                            <CardBody>
-                                <div className="places-buttons">
-                                    <Row>
-                                        <Col md={6} className="ml-auto mr-auto text-center">
-                                            <CardTitle tag="h4">
-                                                최신 시장 동향
-                                            </CardTitle>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col lg={8} xs={12} className="ml-auto mr-auto">
-                                            <Row>
-                                                <Col md={4} xs={12}>
-                                                    <Button
-                                                        color="primary"
-                                                        block
-                                                        onClick={() => notify("tl")}
-                                                    >
-                                                        Top Left
-                                                    </Button>
-                                                </Col>
-                                                <Col md={4} xs={12}>
-                                                    <Button
-                                                        color="primary"
-                                                        block
-                                                        onClick={() => notify("tc")}
-                                                    >
-                                                        Top Center
-                                                    </Button>
-                                                </Col>
-                                                <Col md={4} xs={12}>
-                                                    <Button
-                                                        color="primary"
-                                                        block
-                                                        onClick={() => notify("tr")}
-                                                    >
-                                                        Top Right
-                                                    </Button>
-                                                </Col>
-                                            </Row>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col lg={8} xs={12} className="ml-auto mr-auto">
-                                            <Row>
-                                                <Col md={4} xs={12}>
-                                                    <Button
-                                                        color="primary"
-                                                        block
-                                                        onClick={() => notify("bl")}
-                                                    >
-                                                        Bottom Left
-                                                    </Button>
-                                                </Col>
-                                                <Col md={4} xs={12}>
-                                                    <Button
-                                                        color="primary"
-                                                        block
-                                                        onClick={() => notify("bc")}
-                                                    >
-                                                        Bottom Center
-                                                    </Button>
-                                                </Col>
-                                                <Col md={4} xs={12}>
-                                                    <Button
-                                                        color="primary"
-                                                        block
-                                                        onClick={() => notify("br")}
-                                                    >
-                                                        Bottom Right
-                                                    </Button>
-                                                </Col>
-                                            </Row>
-                                        </Col>
-                                    </Row>
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
+            <div className="main-panel">
+                <PanelHeader
+                    content={
+                        <div className="header text-center">
+                            <h2 className="title">searchResult</h2>
+                        </div>
+                    }
+                />
+                <div className="content">
+                    <NotificationAlert ref={notificationAlert} />
+                    <Row>
+                        <Col md={6} xs={12}>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle tag="h4">핵심 키워드</CardTitle>
+                                </CardHeader>
+                                <CardBody>
+                                    <WordCloudComponent words={words} />
+                                </CardBody>
+                            </Card>
+                        </Col>
+                        <Col md={6} xs={12}>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle tag="h4">주요 뉴스 기사</CardTitle>
+                                </CardHeader>
+                                <CardBody>
+                                    <Alert color="primary">
+                                        <Row className="d-flex align-items-center">
+                                            <span>
+                                                <b>농협</b>경제지주, 김장나눔 9000포기 전달
+                                            </span>
+                                            <Col md={3} xs={12} className="ml-auto">
+                                                <Button
+                                                    color="primary"
+                                                    block
+                                                    onClick={() => golink("http://www.edaily.co.kr/news/newspath.asp?newsid=03483366635836224")}
+                                                >
+                                                    기사 보러가기
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Alert>
+                                    <Alert color="info">
+                                        <Row className="d-flex align-items-center">
+                                            <span>
+                                                <b>농협</b>, 럼피스킨 확산 방지 '깨끗한 농장 가꾸기 캠페인'
+                                            </span>
+                                            <Col md={3} xs={12} className="ml-auto">
+                                                <Button
+                                                    color="info"
+                                                    block
+                                                    onClick={() => golink("https://www.yna.co.kr/view/AKR20231207109700062?input=1195m")}
+                                                >
+                                                    기사 보러가기
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Alert>
+                                    <Alert color="success">
+                                        <Row className="d-flex align-items-center">
+                                            <span>
+                                                한수원-NH<b>농협</b>금융지주, 탄소중립 경제 구축
+                                            </span>
+                                            <Col md={3} xs={12} className="ml-auto">
+                                                <Button
+                                                    color="success"
+                                                    block
+                                                    onClick={() => golink("https://zdnet.co.kr/view/?no=20231207130557")}
+                                                >
+                                                    기사 보러가기
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Alert>
+                                    <Alert color="warning">
+                                        <Row className="d-flex align-items-center">
+                                            <span>
+                                                <b>농협</b> 강원본부, 럼피스킨 확산 방지 ‘깨끗한 축산농장 가꾸기’ 캠페인
+                                            </span>
+                                            <Col md={3} xs={12} className="ml-auto">
+                                                <Button
+                                                    color="warning"
+                                                    block
+                                                    onClick={() => golink("https://www.news1.kr/articles/5254422")}
+                                                >
+                                                    기사 보러가기
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Alert>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                        <Col md={12} xs={12}>
+                            <Card>
+                                <CardBody>
+                                    <div className="places-buttons">
+                                        <Row>
+                                            <Col md={6} className="ml-auto mr-auto text-center">
+                                                <CardTitle tag="h4">
+                                                    최신 시장 동향
+                                                </CardTitle>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col lg={8} xs={12} className="ml-auto mr-auto">
+                                                <Row>
+                                                    <Col md={4} xs={12}>
+                                                        <Button
+                                                            color="primary"
+                                                            block
+                                                            onClick={() => notify("tl")}
+                                                        >
+                                                            Top Left
+                                                        </Button>
+                                                    </Col>
+                                                    <Col md={4} xs={12}>
+                                                        <Button
+                                                            color="primary"
+                                                            block
+                                                            onClick={() => notify("tc")}
+                                                        >
+                                                            Top Center
+                                                        </Button>
+                                                    </Col>
+                                                    <Col md={4} xs={12}>
+                                                        <Button
+                                                            color="primary"
+                                                            block
+                                                            onClick={() => notify("tr")}
+                                                        >
+                                                            Top Right
+                                                        </Button>
+                                                    </Col>
+                                                </Row>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col lg={8} xs={12} className="ml-auto mr-auto">
+                                                <Row>
+                                                    <Col md={4} xs={12}>
+                                                        <Button
+                                                            color="primary"
+                                                            block
+                                                            onClick={() => notify("bl")}
+                                                        >
+                                                            Bottom Left
+                                                        </Button>
+                                                    </Col>
+                                                    <Col md={4} xs={12}>
+                                                        <Button
+                                                            color="primary"
+                                                            block
+                                                            onClick={() => notify("bc")}
+                                                        >
+                                                            Bottom Center
+                                                        </Button>
+                                                    </Col>
+                                                    <Col md={4} xs={12}>
+                                                        <Button
+                                                            color="primary"
+                                                            block
+                                                            onClick={() => notify("br")}
+                                                        >
+                                                            Bottom Right
+                                                        </Button>
+                                                    </Col>
+                                                </Row>
+                                            </Col>
+                                        </Row>
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                </div>
             </div>
         </>
     );
