@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from 'react';
+import axios from "axios";
 import NotificationAlert from "react-notification-alert";
 import ReactWordcloud from 'react-wordcloud';
+import { useParams } from 'react-router-dom';
+import { A1_API_URL } from '../libs/Constants';
 
 
 // reactstrap components
@@ -49,6 +52,25 @@ const words = [
 import PanelHeader from "components/PanelHeader/PanelHeader.js";
 
 function SearchResult() {
+    useEffect(() => {
+        // 현재 URL에서 item 값을 추출합니다.
+        const urlParams = new URLSearchParams(window.location.search);
+        const item = urlParams.get("item");
+    
+        if (item) {
+          // 추출한 item 값을 사용하여 Axios로 요청을 보냅니다.
+          axios
+            .get(A1_API_URL + `/api/searchResult?item=${item}`)
+            .then((response) => {
+              // 데이터 처리 로직
+              console.log(response.data);
+            })
+            .catch((error) => {
+              console.error("Axios 오류:", error);
+            });
+        }
+    }, []);
+
     const notificationAlert = React.useRef();
     const golink = (url) => {
         window.location.href = url;
