@@ -21,12 +21,13 @@ function Dashboard() {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState([]);
-  const [yourData, setYourData] = useState([]);
+  const [searchData, setSearchData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [itemDetails, setItemDetails] = useState(null);
   const [content, setContent] = useState("");
   const [gptResult, setGptResult] = useState("");
   const [uploadedFile, setUploadedFile] = useState(null);
+  const [selectedOption, setSelectedOption] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -48,7 +49,7 @@ function Dashboard() {
   const fetchData = () => {
     axios.get(A1_API_URL + `/api/search`)
       .then((response) => {
-        setYourData(response.data);
+        setSearchData(response.data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -80,7 +81,7 @@ function Dashboard() {
 
     fetchData();
 
-    const filteredResults = yourData.filter((item) =>
+    const filteredResults = searchData.filter((item) =>
       item.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
@@ -88,7 +89,7 @@ function Dashboard() {
   };
 
   const handleResultClick = (item) => {
-    setSelectedItem(item);
+      setSelectedItem(item);
   };
 
   const handleFileUpload = (file) => {
@@ -138,6 +139,16 @@ function Dashboard() {
     handleFileUpload(file);
   };
 
+  const handleSelectChange = (e) => {
+    const selectedOption = e.target.value;
+
+    if (selectedOption != "선택되지 않음") {
+      setSelectedOption(selectedOption);
+    }else {
+      return;
+    }
+  };
+
   return (
     <Container style={{ marginTop: '15%' }}>
       <Row className="justify-content-center align-items-center">
@@ -145,6 +156,7 @@ function Dashboard() {
           <a href="/" style={{color:'white'}} className="d-flex justify-content-center align-items-center">
             <h1><b>Assistance 1step</b></h1>
           </a>
+
           <Form onSubmit={handleSubmit}>
             <InputGroup className="no-border">
               <Input
@@ -210,7 +222,21 @@ function Dashboard() {
                 <tr>
                   <td>results : {itemDetails}</td>
                   <td style={{textAlign : "right"}}>
-                    <Link to={`/searchResult?item=${itemDetails}`} style={{color : "black"}}>검색 결과 확인</Link>
+                    <select
+                      value={selectedOption}
+                      onChange={handleSelectChange}
+                      className="form-control mr-2"
+                      style={{width : "50%", display : "inline"}}
+                    >
+                      <option value="선택되지 않음">선택되지 않음</option>
+                      <option value="AICC">AICC</option>
+                      <option value="챗봇">챗봇</option>
+                      <option value="콜봇">콜봇</option>
+                      <option value="메시징서비스">메시징서비스</option>
+                    </select>
+                    <Button color="warning">
+                      <Link to={`/searchResult?item=${itemDetails} + ${selectedOption}`} style={{color : "black"}}> 검색 결과 확인</Link>
+                    </Button>
                   </td>
                 </tr>
               </tbody>
