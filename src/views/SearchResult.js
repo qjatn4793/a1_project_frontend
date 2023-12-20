@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import NotificationAlert from "react-notification-alert";
 import ReactWordcloud from 'react-wordcloud';
-import { useParams, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { A1_API_URL } from '../libs/Constants';
 
 

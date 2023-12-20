@@ -1,16 +1,8 @@
 import React from "react";
 import SearchBar from "components/SearchBar/SearchBar";
 import {
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  Form,
   Container,
-  Row,
-  Col,
-  Table,
-  Button
+  Row
 } from "reactstrap";
 
 function Dashboard() {
