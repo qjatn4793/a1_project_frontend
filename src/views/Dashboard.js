@@ -103,9 +103,7 @@ function Dashboard() {
     // 서버에 POST 요청 보내기
     axios.post(A1_API_URL + `/api/searchItem`, formData)
       .then((response) => {
-        console.log('서버 응답:', response.data);
-
-        setItemDetails(response.data);
+        console.log(response.data.data);
       })
       .catch((error) => {
         console.error('서버 업로드 오류:', error);
