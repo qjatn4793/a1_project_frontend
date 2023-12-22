@@ -27,9 +27,12 @@ const SearchBar = () => {
     const [gptResult, setGptResult] = useState("");
     const [uploadedFile, setUploadedFile] = useState(null);
     const [selectedOption, setSelectedOption] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [suggestedTerms, setSuggestedTerms] = useState([]);
 
     useEffect(() => {
         fetchData();
+        updateSuggestedTerms();
     }, []);
 
     useEffect(() => {
@@ -92,6 +95,9 @@ const SearchBar = () => {
     };
 
     const handleFileUpload = (file) => {
+
+        setIsLoading(true);
+
         // 파일 업로드 로직을 수행
         setUploadedFile(file);
 
@@ -108,6 +114,8 @@ const SearchBar = () => {
             })
             .catch((error) => {
                 console.error('서버 업로드 오류:', error);
+            }).finally(() => {
+                setIsLoading(false); // 파일 업로드 완료 시 로딩 비활성화
             });
     };
 
@@ -167,6 +175,21 @@ const SearchBar = () => {
         }
     };
 
+    // 추천 검색어를 설정하는 함수
+    const updateSuggestedTerms = () => {
+        const allTerms = [
+            "농협", "SKB", "KT", "LG", "KB증권", "Kakao", "카카오", "Naver", "네이버", "Samsung", "삼성",
+            "Samsung SDS", "삼성 SDS", "SK Telecom", "LG 일렉트로닉스", "쿠팡", "우아한 형제들", "라인",
+            "왓챠", "직방", "야놀자", "인포뱅크", "Infobank", "잔디", "배달의민족", "토스", "마켓컬리",
+            "지그재그", "KIA", "기아", "현대", "Hyundai", "LG CNS", "야나두"
+        ];
+        const randomTerms = allTerms.sort(() => 0.5 - Math.random()).slice(0, 3);
+        setSuggestedTerms(randomTerms);
+    };
+
+    const handleSuggestionClick = (term) => {
+        setSelectedItem(term);
+    };
 
     return (
         <Col md="6">
@@ -211,7 +234,19 @@ const SearchBar = () => {
                         </InputGroupText>
                     </InputGroupAddon>
                 </InputGroup>
+                <div className="d-flex align-items-center justify-content-center">
+                    {suggestedTerms.map((term, index) => (
+                        <Button key={index} outline style={{ color: "black", borderColor: "gray", borderRadius: "17px" }} className="ml-2" onMouseDown={() => handleSuggestionClick(term)}>
+                            {term}
+                        </Button>
+                    ))}
+                </div>
             </Form>
+            {isLoading && (
+                <div className="loading-overlay">
+                    <div className="loading-spinner"></div>
+                </div>
+            )}
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" clipRule="evenodd" d="M12.4983 4.43944C12.2141 4.18685 11.7859 4.18685 11.5017 4.43944L2.50174 12.4394C2.19215 12.7146 2.16426 13.1887 2.43945 13.4983C2.71464 13.8079 3.18869 13.8357 3.49828 13.5606L12 6.00347L20.5017 13.5606C20.8113 13.8357 21.2854 13.8079 21.5606 13.4983C21.8358 13.1887 21.8079 12.7146 21.4983 12.4394L12.4983 4.43944ZM21.4983 19.4394L12.4983 11.4394C12.2141 11.1869 11.7859 11.1869 11.5017 11.4394L2.50174 19.4394C2.19215 19.7146 2.16426 20.1887 2.43945 20.4983C2.71464 20.8079 3.18869 20.8357 3.49828 20.5606L12 13.0035L20.5017 20.5606C20.8113 20.8357 21.2854 20.8079 21.5606 20.4983C21.8358 20.1887 21.8079 19.7146 21.4983 19.4394Z" fill="white" />
@@ -250,7 +285,7 @@ const SearchBar = () => {
                                     value={selectedOption}
                                     onChange={handleSelectChange}
                                     className="form-control mr-2"
-                                    style={{ width: "50%", display: "inline" }}
+                                    style={{ display: "inline", width: "50%" }}
                                 >
                                     <option value="선택되지 않음">미선택</option>
                                     <option value="AICC">AICC</option>
@@ -258,7 +293,7 @@ const SearchBar = () => {
                                     <option value="콜봇">콜봇</option>
                                     <option value="메시징서비스">메시징서비스</option>
                                 </select>
-                                <Button color="warning" onClick={handleClick} style={{padding : "10px 0px 10px 0px"}}>
+                                <Button color="warning" onClick={handleClick} style={{ padding: "10px 0px 10px 0px" }}>
                                     <span style={{ color: "black" }}>검색 결과 확인</span>
                                 </Button>
                             </td>

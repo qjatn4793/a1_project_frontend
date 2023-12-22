@@ -17,6 +17,7 @@ import {
     CardHeader,
     Row,
     Col,
+    CardText,
 } from "reactstrap";
 
 const WordCloudComponent = ({ words }) => {
@@ -129,29 +130,29 @@ function SearchResult() {
     }
 
     const navigate = useNavigate();
-    
+
     return (
         <>
             <div className="main-panel">
-                <PanelHeader style = {{background : "#ffffff"}}
+                <PanelHeader style={{ background: "#ffffff" }}
                     content={
                         <Row>
                             {/* <a href="#" onClick={() => navigate('/')} className="title ml-5" style={{color : "black", paddingTop : "15px", marginBottom : "15px"}}><h3><b style={{color : "#fa7a50"}}>A1</b></h3></a> */}
-                            <a href="#" onClick={() => navigate('/a1_bot/dashboard')} className="title ml-5" style={{color : "black", paddingTop : "15px", marginBottom : "15px"}}><h3><b style={{color : "#fa7a50"}}>A1</b></h3></a>
-                            <div style={{paddingTop: "12px", width:"70%"}}>
+                            <a href="#" onClick={() => navigate('/a1_bot/dashboard')} className="title ml-5" style={{ color: "black", paddingTop: "15px", marginBottom: "15px" }}><h3><b style={{ color: "#fa7a50" }}>A1</b></h3></a>
+                            <div style={{ paddingTop: "12px", width: "70%" }}>
                                 <SearchBar></SearchBar>
                             </div>
-                        </Row>                            
+                        </Row>
                     }
                 />
-                <div className="header text-center" style={{backgroundColor : "#ffffff"}}>
-                    <h4 className="title" style={{color : "black", borderTop : "1px solid #C1C1C1", paddingTop : "15px", paddingBottom : "15px", marginTop : "0px"}}><b style={{color : "#fa7a50"}}>{item}</b> 검색결과</h4>
+                <div className="header text-center" style={{ backgroundColor: "#ffffff" }}>
+                    <h4 className="title" style={{ color: "black", borderTop: "1px solid #C1C1C1", paddingTop: "15px", paddingBottom: "15px", marginTop: "0px" }}><b style={{ color: "#fa7a50" }}>{item}</b> 검색결과</h4>
                 </div>
                 <div className="content">
                     <NotificationAlert ref={notificationAlert} />
                     <Row>
                         <Col md={6} xs={12}>
-                            <Card style={{borderRadius: "25px"}}>
+                            <Card style={{ borderRadius: "25px" }}>
                                 <CardHeader>
                                     <CardTitle><b>핵심 키워드</b></CardTitle>
                                 </CardHeader>
@@ -159,142 +160,128 @@ function SearchResult() {
                                     <WordCloudComponent words={words} />
                                 </CardBody>
                             </Card>
-                            <Card style={{borderRadius: "25px"}}>
+                            <Card style={{ borderRadius: "25px" }}>
+                                <CardHeader>
+                                    <CardTitle><b>키워드 트랜드 변화</b></CardTitle>
+                                </CardHeader>
                                 <CardBody>
-                                    <div className="places-buttons">
-                                        <Row>
-                                            <Col md={6}>
-                                                <CardTitle><b>분야 트랜드</b></CardTitle>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col lg={8} xs={12} className="ml-auto mr-auto">
-                                                <Row>
-                                                    <Col md={4} xs={12}>
-                                                        <Button
-                                                            color="primary"
-                                                            block
-                                                            onClick={() => notify("tl")}
-                                                        >
-                                                            Top Left
-                                                        </Button>
-                                                    </Col>
-                                                    <Col md={4} xs={12}>
-                                                        <Button
-                                                            color="primary"
-                                                            block
-                                                            onClick={() => notify("tc")}
-                                                        >
-                                                            Top Center
-                                                        </Button>
-                                                    </Col>
-                                                    <Col md={4} xs={12}>
-                                                        <Button
-                                                            color="primary"
-                                                            block
-                                                            onClick={() => notify("tr")}
-                                                        >
-                                                            Top Right
-                                                        </Button>
-                                                    </Col>
-                                                </Row>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col lg={8} xs={12} className="ml-auto mr-auto">
-                                                <Row>
-                                                    <Col md={4} xs={12}>
-                                                        <Button
-                                                            color="primary"
-                                                            block
-                                                            onClick={() => notify("bl")}
-                                                        >
-                                                            Bottom Left
-                                                        </Button>
-                                                    </Col>
-                                                    <Col md={4} xs={12}>
-                                                        <Button
-                                                            color="primary"
-                                                            block
-                                                            onClick={() => notify("bc")}
-                                                        >
-                                                            Bottom Center
-                                                        </Button>
-                                                    </Col>
-                                                    <Col md={4} xs={12}>
-                                                        <Button
-                                                            color="primary"
-                                                            block
-                                                            onClick={() => notify("br")}
-                                                        >
-                                                            Bottom Right
-                                                        </Button>
-                                                    </Col>
-                                                </Row>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col lg={8} xs={12} className="ml-auto mr-auto">
-                                                <Row>
-                                                    <Col md={4} xs={12}>
-                                                        <Button
-                                                            color="primary"
-                                                            block
-                                                            onClick={() => notify("tl")}
-                                                        >
-                                                            Top Left
-                                                        </Button>
-                                                    </Col>
-                                                    <Col md={4} xs={12}>
-                                                        <Button
-                                                            color="primary"
-                                                            block
-                                                            onClick={() => notify("tc")}
-                                                        >
-                                                            Top Center
-                                                        </Button>
-                                                    </Col>
-                                                    <Col md={4} xs={12}>
-                                                        <Button
-                                                            color="primary"
-                                                            block
-                                                            onClick={() => notify("tr")}
-                                                        >
-                                                            Top Right
-                                                        </Button>
-                                                    </Col>
-                                                </Row>
-                                            </Col>
-                                        </Row>
-                                    </div>
+                                    <Row>
+                                        <Col md={4} xs={12}>
+                                            <Card style={{ borderRadius: "25px" }}>
+                                                <CardHeader>
+                                                    <CardTitle style={{ color: "#FF5C00" }}><b>6개월 전</b></CardTitle>
+                                                </CardHeader>
+                                                <CardBody>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>1. 생성형 AI</b>
+                                                        <b style={{ color: "gray" }}>343건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>2. GPT 4.0</b>
+                                                        <b style={{ color: "gray" }}>121건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>3. LLM</b>
+                                                        <b style={{ color: "gray" }}>96건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>4. 언어처리기술</b>
+                                                        <b style={{ color: "gray" }}>32건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>5. AI 솔루션</b>
+                                                        <b style={{ color: "gray" }}>11건</b>
+                                                    </div>
+                                                </CardBody>
+                                            </Card>
+                                        </Col>
+                                        <Col md={4} xs={12}>
+                                            <Card style={{ borderRadius: "25px" }}>
+                                                <CardHeader>
+                                                    <CardTitle style={{ color: "#FF5C00" }}><b>3개월 전</b></CardTitle>
+                                                </CardHeader>
+                                                <CardBody>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>1. 생성형 AI</b>
+                                                        <b style={{ color: "gray" }}>443건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>2. GPT 4.0</b>
+                                                        <b style={{ color: "gray" }}>221건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>3. LLM</b>
+                                                        <b style={{ color: "gray" }}>125건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>4. 언어처리기술</b>
+                                                        <b style={{ color: "gray" }}>42건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>5. AI 솔루션</b>
+                                                        <b style={{ color: "gray" }}>21건</b>
+                                                    </div>
+                                                </CardBody>
+                                            </Card>
+                                        </Col>
+                                        <Col md={4} xs={12}>
+                                            <Card style={{ borderRadius: "25px" }}>
+                                                <CardHeader>
+                                                    <CardTitle style={{ color: "#FF5C00" }}><b>오늘</b></CardTitle>
+                                                </CardHeader>
+                                                <CardBody>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>1. 생성형 AI</b>
+                                                        <b style={{ color: "gray" }}>493건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>2. GPT 4.0</b>
+                                                        <b style={{ color: "gray" }}>276건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>3. LLM</b>
+                                                        <b style={{ color: "gray" }}>149건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>4. 언어처리기술</b>
+                                                        <b style={{ color: "gray" }}>56건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>5. AI 솔루션</b>
+                                                        <b style={{ color: "gray" }}>38건</b>
+                                                    </div>
+                                                </CardBody>
+                                            </Card>
+                                        </Col>
+                                    </Row>
                                 </CardBody>
                             </Card>
                         </Col>
                         <Col md={6} xs={12}>
-                            <Card style={{borderRadius: "25px"}}>
+                            <Card style={{ borderRadius: "25px" }}>
                                 <CardHeader>
-                                <CardTitle><b>주요 뉴스 기사</b></CardTitle>
+                                    <CardTitle><b>주요 뉴스 기사</b></CardTitle>
                                 </CardHeader>
                                 <CardBody>
-                                <Row>
-                                    {newsData.map((news, index) => (
-                                    <Col md={6} xs={12} key={index}>
-                                        <Alert
-                                        style={{
-                                            border: "solid 1px #e2e3e5",
-                                            backgroundColor: "white",
-                                            borderRadius: "16px",
-                                        }}
-                                        >
-                                        <div onClick={() => golink(news.link)}>
-                                            <p style={{ color: "black", margin: "0", cursor: 'pointer' }} dangerouslySetInnerHTML={{ __html: news.title }} />
-                                        </div>
-                                        <br></br>
-                                        <div className="text-muted" style={{ textAlign: "right" }}>{formatPubDate(news.pubDate)}</div>
-                                        </Alert>
-                                    </Col>
-                                    ))}
-                                </Row>
+                                    <Row>
+                                        {newsData.map((news, index) => (
+                                            <Col md={6} xs={12} key={index}>
+                                                <Alert
+                                                    style={{
+                                                        border: "solid 1px #e2e3e5",
+                                                        backgroundColor: "white",
+                                                        borderRadius: "16px",
+                                                    }}
+                                                >
+                                                    <div onClick={() => golink(news.link)}>
+                                                        <p style={{ color: "black", margin: "0", cursor: 'pointer' }} dangerouslySetInnerHTML={{ __html: news.title }} />
+                                                    </div>
+                                                    <br></br>
+                                                    <div className="text-muted" style={{ textAlign: "right" }}>{formatPubDate(news.pubDate)}</div>
+                                                </Alert>
+                                            </Col>
+                                        ))}
+                                    </Row>
                                 </CardBody>
                             </Card>
                         </Col>
