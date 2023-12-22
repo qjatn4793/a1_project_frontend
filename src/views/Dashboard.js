@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import SearchBar from "components/SearchBar/SearchBar";
 import {
   Container,
@@ -6,10 +7,12 @@ import {
 } from "reactstrap";
 
 function Dashboard() {
+  const navigate = useNavigate();
+
   return (
     <Container style={{ marginTop: '15%' }}>
       <Row className="justify-content-center align-items-center">
-        <a href="/" style={{ color: 'white' }} className="d-flex justify-content-center align-items-center">
+        <a href="#" onClick={() => navigate('/')} style={{ color: 'white' }} className="d-flex justify-content-center align-items-center">
           <h1><b>A</b><b style={{ opacity: '0.7' }}>ssistance</b> <b>1</b><b style={{ opacity: '0.7' }}>step</b></h1>
         </a>
       </Row>
