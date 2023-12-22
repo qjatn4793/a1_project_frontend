@@ -133,7 +133,8 @@ function SearchResult() {
                 <PanelHeader style = {{background : "#ffffff"}}
                     content={
                         <Row>
-                            <a href="/" className="title ml-5" style={{color : "black", paddingTop : "15px", marginBottom : "15px"}}><h3><b style={{color : "#fa7a50"}}>A1</b></h3></a>
+                            {/* <a href="/" className="title ml-5" style={{color : "black", paddingTop : "15px", marginBottom : "15px"}}><h3><b style={{color : "#fa7a50"}}>A1</b></h3></a> */}
+                            <a href="/a1_bot/dashboard" className="title ml-5" style={{color : "black", paddingTop : "15px", marginBottom : "15px"}}><h3><b style={{color : "#fa7a50"}}>A1</b></h3></a>
                             <div style={{paddingTop: "12px", width:"70%"}}>
                                 <SearchBar></SearchBar>
                             </div>

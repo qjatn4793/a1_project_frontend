@@ -17,6 +17,7 @@
 */
 import Dashboard from "views/Dashboard.js";
 import SearchResult from "views/SearchResult.js";
+import SearchFileResult from "views/SearchFileResult.js";
 import Notifications from "views/Notifications.js";
 import Icons from "views/Icons.js";
 import Typography from "views/Typography.js";
@@ -25,6 +26,27 @@ import Upgrade from "views/Upgrade.js";
 import UserPage from "views/UserPage.js";
 
 var dashRoutes = [
+  {
+    path: "/a1_bot/dashboard",
+    name: "Dashboard",
+    icon: "design_app",
+    component: <Dashboard />,
+    layout: "/admin",
+  },
+  {
+    path: "/a1_bot/searchResult",
+    name: "Search Result",
+    icon: "nc-icon nc-zoom-split",
+    component: <SearchResult />,
+    layout: "/admin",
+  },
+  {
+    path: "/a1_bot/searchFileResult",
+    name: "Search File Result",
+    icon: "nc-icon nc-zoom-split",
+    component: <SearchFileResult />,
+    layout: "/admin",
+  },
   {
     path: "/dashboard",
     name: "Dashboard",
@@ -37,6 +59,13 @@ var dashRoutes = [
     name: "Search Result",
     icon: "nc-icon nc-zoom-split",
     component: <SearchResult />,
+    layout: "/admin",
+  },
+  {
+    path: "/searchFileResult",
+    name: "Search File Result",
+    icon: "nc-icon nc-zoom-split",
+    component: <SearchFileResult />,
     layout: "/admin",
   },
   {

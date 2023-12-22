@@ -80,6 +80,10 @@ function Admin(props) {
             path="/searchResult"
             element={<Navigate to="/searchResult" replace />}
           />
+          <Route
+            path="/a1_bot"
+            element={<Navigate to="/dashboard" replace />}
+          />
         </Routes>
         {/* <Footer fluid /> */}
       </div>
