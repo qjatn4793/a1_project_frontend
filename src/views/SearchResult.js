@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 import NotificationAlert from "react-notification-alert";
 import ReactWordcloud from 'react-wordcloud';
 import { useLocation } from 'react-router-dom';
@@ -126,6 +127,8 @@ function SearchResult() {
         const day = String(date.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
     }
+
+    const navigate = useNavigate();
     
     return (
         <>
@@ -133,8 +136,8 @@ function SearchResult() {
                 <PanelHeader style = {{background : "#ffffff"}}
                     content={
                         <Row>
-                            {/* <a href="/" className="title ml-5" style={{color : "black", paddingTop : "15px", marginBottom : "15px"}}><h3><b style={{color : "#fa7a50"}}>A1</b></h3></a> */}
-                            <a href="/a1_bot/dashboard" className="title ml-5" style={{color : "black", paddingTop : "15px", marginBottom : "15px"}}><h3><b style={{color : "#fa7a50"}}>A1</b></h3></a>
+                            {/* <a href="#" onClick={() => navigate('/')} className="title ml-5" style={{color : "black", paddingTop : "15px", marginBottom : "15px"}}><h3><b style={{color : "#fa7a50"}}>A1</b></h3></a> */}
+                            <a href="#" onClick={() => navigate('/a1_bot/dashboard')} className="title ml-5" style={{color : "black", paddingTop : "15px", marginBottom : "15px"}}><h3><b style={{color : "#fa7a50"}}>A1</b></h3></a>
                             <div style={{paddingTop: "12px", width:"70%"}}>
                                 <SearchBar></SearchBar>
                             </div>
