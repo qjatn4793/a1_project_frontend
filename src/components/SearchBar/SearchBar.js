@@ -1,6 +1,6 @@
 // SearchBar.js
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import {
     Input,
     InputGroup,
@@ -191,56 +191,114 @@ const SearchBar = () => {
         setSelectedItem(term);
     };
 
+    const location = useLocation();
+    const isDashboard = location.pathname === '/a1_bot/dashboard';
+
     return (
         <Col md="6">
             <Form onSubmit={handleSubmit}>
-                <InputGroup>
-                    <Input
-                        placeholder="🏢 관심 기업을 입력해보세요"
-                        style={{ backgroundColor: 'white' }}
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        onDrop={handleDrop}
-                        onDragEnter={handleDragEnter}
-                        onDragLeave={handleDragLeave}
-                        onDragOver={(e) => e.preventDefault()}
-                    />
-                    <InputGroupAddon addonType="append">
-                        <InputGroupText
+                {!isDashboard ? (
+                    <InputGroup>
+                        <Input
+                            placeholder="🏢 관심 기업을 입력해보세요"
                             style={{ backgroundColor: 'white' }}
-                            onClick={handleSearch}
-                        >
-                            <label style={{ margin: 0, cursor: 'pointer' }}>
-                                {/* <i className="now-ui-icons ui-1_zoom-bold" /> */}
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9.5 16C7.68333 16 6.14583 15.3708 4.8875 14.1125C3.62917 12.8542 3 11.3167 3 9.5C3 7.68333 3.62917 6.14583 4.8875 4.8875C6.14583 3.62917 7.68333 3 9.5 3C11.3167 3 12.8542 3.62917 14.1125 4.8875C15.3708 6.14583 16 7.68333 16 9.5C16 10.2333 15.8833 10.925 15.65 11.575C15.4167 12.225 15.1 12.8 14.7 13.3L20.3 18.9C20.4833 19.0833 20.575 19.3167 20.575 19.6C20.575 19.8833 20.4833 20.1167 20.3 20.3C20.1167 20.4833 19.8833 20.575 19.6 20.575C19.3167 20.575 19.0833 20.4833 18.9 20.3L13.3 14.7C12.8 15.1 12.225 15.4167 11.575 15.65C10.925 15.8833 10.2333 16 9.5 16ZM9.5 14C10.75 14 11.8125 13.5625 12.6875 12.6875C13.5625 11.8125 14 10.75 14 9.5C14 8.25 13.5625 7.1875 12.6875 6.3125C11.8125 5.4375 10.75 5 9.5 5C8.25 5 7.1875 5.4375 6.3125 6.3125C5.4375 7.1875 5 8.25 5 9.5C5 10.75 5.4375 11.8125 6.3125 12.6875C7.1875 13.5625 8.25 14 9.5 14Z" fill="#FF5C00" />
-                                </svg>
-                            </label>
-                        </InputGroupText>
-                        <InputGroupText style={{ backgroundColor: 'white' }}>
-                            <label htmlFor="fileInput" style={{ margin: 0, cursor: 'pointer' }}>
-                                {/* <i className="now-ui-icons files_single-copy-04" /> */}
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V9C3 8.45 3.19583 7.97917 3.5875 7.5875C3.97917 7.19583 4.45 7 5 7H7V5C7 4.45 7.19583 3.97917 7.5875 3.5875C7.97917 3.19583 8.45 3 9 3H15C15.55 3 16.0208 3.19583 16.4125 3.5875C16.8042 3.97917 17 4.45 17 5V11H19C19.55 11 20.0208 11.1958 20.4125 11.5875C20.8042 11.9792 21 12.45 21 13V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H13V17H11V21H5ZM5 19H7V17H5V19ZM5 15H7V13H5V15ZM5 11H7V9H5V11ZM9 15H11V13H9V15ZM9 11H11V9H9V11ZM9 7H11V5H9V7ZM13 15H15V13H13V15ZM13 11H15V9H13V11ZM13 7H15V5H13V7ZM17 19H19V17H17V19ZM17 15H19V13H17V15Z" fill="#AAAAAA" />
-                                </svg>
-                            </label>
-                            <input
-                                id="fileInput"
-                                type="file"
-                                accept=".txt,.pdf,.doc,.docx"
-                                style={{ display: 'none' }}
-                                onChange={handleFileChange}
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            onDrop={handleDrop}
+                            onDragEnter={handleDragEnter}
+                            onDragLeave={handleDragLeave}
+                            onDragOver={(e) => e.preventDefault()}
+                        />
+                        <InputGroupAddon addonType="append">
+                            <InputGroupText
+                                style={{ backgroundColor: 'white' }}
+                                onClick={handleSearch}
+                            >
+                                <label style={{ margin: 0, cursor: 'pointer' }}>
+                                    {/* <i className="now-ui-icons ui-1_zoom-bold" /> */}
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9.5 16C7.68333 16 6.14583 15.3708 4.8875 14.1125C3.62917 12.8542 3 11.3167 3 9.5C3 7.68333 3.62917 6.14583 4.8875 4.8875C6.14583 3.62917 7.68333 3 9.5 3C11.3167 3 12.8542 3.62917 14.1125 4.8875C15.3708 6.14583 16 7.68333 16 9.5C16 10.2333 15.8833 10.925 15.65 11.575C15.4167 12.225 15.1 12.8 14.7 13.3L20.3 18.9C20.4833 19.0833 20.575 19.3167 20.575 19.6C20.575 19.8833 20.4833 20.1167 20.3 20.3C20.1167 20.4833 19.8833 20.575 19.6 20.575C19.3167 20.575 19.0833 20.4833 18.9 20.3L13.3 14.7C12.8 15.1 12.225 15.4167 11.575 15.65C10.925 15.8833 10.2333 16 9.5 16ZM9.5 14C10.75 14 11.8125 13.5625 12.6875 12.6875C13.5625 11.8125 14 10.75 14 9.5C14 8.25 13.5625 7.1875 12.6875 6.3125C11.8125 5.4375 10.75 5 9.5 5C8.25 5 7.1875 5.4375 6.3125 6.3125C5.4375 7.1875 5 8.25 5 9.5C5 10.75 5.4375 11.8125 6.3125 12.6875C7.1875 13.5625 8.25 14 9.5 14Z" fill="#FF5C00" />
+                                    </svg>
+                                </label>
+                            </InputGroupText>
+                            <InputGroupText style={{ backgroundColor: 'white'}}>
+                                <label htmlFor="fileInput" style={{ margin: 0, cursor: 'pointer' }}>
+                                    {/* <i className="now-ui-icons files_single-copy-04" /> */}
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V9C3 8.45 3.19583 7.97917 3.5875 7.5875C3.97917 7.19583 4.45 7 5 7H7V5C7 4.45 7.19583 3.97917 7.5875 3.5875C7.97917 3.19583 8.45 3 9 3H15C15.55 3 16.0208 3.19583 16.4125 3.5875C16.8042 3.97917 17 4.45 17 5V11H19C19.55 11 20.0208 11.1958 20.4125 11.5875C20.8042 11.9792 21 12.45 21 13V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H13V17H11V21H5ZM5 19H7V17H5V19ZM5 15H7V13H5V15ZM5 11H7V9H5V11ZM9 15H11V13H9V15ZM9 11H11V9H9V11ZM9 7H11V5H9V7ZM13 15H15V13H13V15ZM13 11H15V9H13V11ZM13 7H15V5H13V7ZM17 19H19V17H17V19ZM17 15H19V13H17V15Z" fill="#AAAAAA" />
+                                    </svg>
+                                </label>
+                                <input
+                                    id="fileInput"
+                                    type="file"
+                                    accept=".txt,.pdf,.doc,.docx"
+                                    style={{ display: 'none' }}
+                                    onChange={handleFileChange}
+                                />
+                            </InputGroupText>
+                        </InputGroupAddon>
+                        <div className="ml-3">
+                            추천 검색어 :
+                            {suggestedTerms.map((term, index) => (
+                                <Button key={index} outline style={{ color: "black", borderColor: "gray", borderRadius: "17px" }} className="ml-2" onMouseDown={() => handleSuggestionClick(term)}>
+                                    {term}
+                                </Button>
+                            ))}
+                        </div>
+                    </InputGroup>
+                ) : (
+                    <div>
+                        <InputGroup>
+                            <Input
+                                placeholder="🏢 관심 기업을 입력해보세요"
+                                style={{ backgroundColor: 'white' }}
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                onDrop={handleDrop}
+                                onDragEnter={handleDragEnter}
+                                onDragLeave={handleDragLeave}
+                                onDragOver={(e) => e.preventDefault()}
                             />
-                        </InputGroupText>
-                    </InputGroupAddon>
-                </InputGroup>
-                <div className="d-flex align-items-center justify-content-center">
-                    {suggestedTerms.map((term, index) => (
-                        <Button key={index} outline style={{ color: "black", borderColor: "gray", borderRadius: "17px" }} className="ml-2" onMouseDown={() => handleSuggestionClick(term)}>
-                            {term}
-                        </Button>
-                    ))}
-                </div>
+                            <InputGroupAddon addonType="append">
+                                <InputGroupText
+                                    style={{ backgroundColor: 'white' }}
+                                    onClick={handleSearch}
+                                >
+                                    <label style={{ margin: 0, cursor: 'pointer' }}>
+                                        {/* <i className="now-ui-icons ui-1_zoom-bold" /> */}
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M9.5 16C7.68333 16 6.14583 15.3708 4.8875 14.1125C3.62917 12.8542 3 11.3167 3 9.5C3 7.68333 3.62917 6.14583 4.8875 4.8875C6.14583 3.62917 7.68333 3 9.5 3C11.3167 3 12.8542 3.62917 14.1125 4.8875C15.3708 6.14583 16 7.68333 16 9.5C16 10.2333 15.8833 10.925 15.65 11.575C15.4167 12.225 15.1 12.8 14.7 13.3L20.3 18.9C20.4833 19.0833 20.575 19.3167 20.575 19.6C20.575 19.8833 20.4833 20.1167 20.3 20.3C20.1167 20.4833 19.8833 20.575 19.6 20.575C19.3167 20.575 19.0833 20.4833 18.9 20.3L13.3 14.7C12.8 15.1 12.225 15.4167 11.575 15.65C10.925 15.8833 10.2333 16 9.5 16ZM9.5 14C10.75 14 11.8125 13.5625 12.6875 12.6875C13.5625 11.8125 14 10.75 14 9.5C14 8.25 13.5625 7.1875 12.6875 6.3125C11.8125 5.4375 10.75 5 9.5 5C8.25 5 7.1875 5.4375 6.3125 6.3125C5.4375 7.1875 5 8.25 5 9.5C5 10.75 5.4375 11.8125 6.3125 12.6875C7.1875 13.5625 8.25 14 9.5 14Z" fill="#FF5C00" />
+                                        </svg>
+                                    </label>
+                                </InputGroupText>
+                                <InputGroupText style={{ backgroundColor: 'white' }}>
+                                    <label htmlFor="fileInput" style={{ margin: 0, cursor: 'pointer' }}>
+                                        {/* <i className="now-ui-icons files_single-copy-04" /> */}
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V9C3 8.45 3.19583 7.97917 3.5875 7.5875C3.97917 7.19583 4.45 7 5 7H7V5C7 4.45 7.19583 3.97917 7.5875 3.5875C7.97917 3.19583 8.45 3 9 3H15C15.55 3 16.0208 3.19583 16.4125 3.5875C16.8042 3.97917 17 4.45 17 5V11H19C19.55 11 20.0208 11.1958 20.4125 11.5875C20.8042 11.9792 21 12.45 21 13V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H13V17H11V21H5ZM5 19H7V17H5V19ZM5 15H7V13H5V15ZM5 11H7V9H5V11ZM9 15H11V13H9V15ZM9 11H11V9H9V11ZM9 7H11V5H9V7ZM13 15H15V13H13V15ZM13 11H15V9H13V11ZM13 7H15V5H13V7ZM17 19H19V17H17V19ZM17 15H19V13H17V15Z" fill="#AAAAAA" />
+                                        </svg>
+                                    </label>
+                                    <input
+                                        id="fileInput"
+                                        type="file"
+                                        accept=".txt,.pdf,.doc,.docx"
+                                        style={{ display: 'none' }}
+                                        onChange={handleFileChange}
+                                    />
+                                </InputGroupText>
+                            </InputGroupAddon>
+                        </InputGroup>
+
+                        <div className="d-flex align-items-center justify-content-center">
+                            추천 검색어 :
+                            {suggestedTerms.map((term, index) => (
+                                <Button key={index} outline style={{ color: "black", borderColor: "gray", borderRadius: "17px" }} className="ml-2" onMouseDown={() => handleSuggestionClick(term)}>
+                                    {term}
+                                </Button>
+                            ))}
+                        </div>
+                    </div>
+                )}
             </Form>
             {isLoading && (
                 <div className="loading-overlay">
