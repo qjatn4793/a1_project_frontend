@@ -192,7 +192,7 @@ const SearchBar = () => {
     };
 
     const location = useLocation();
-    const isDashboard = location.pathname === '/a1_bot/dashboard';
+    const isDashboard = location.pathname === '/a1_bot/dashboard' || location.pathname === '/dashboard';
 
     return (
         <Col md="6">
