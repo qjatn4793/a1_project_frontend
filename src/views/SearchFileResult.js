@@ -5,7 +5,6 @@ import ReactWordcloud from 'react-wordcloud';
 import { useLocation } from 'react-router-dom';
 import { A1_API_URL } from '../libs/Constants';
 
-
 // reactstrap components
 import {
     Button,
@@ -53,19 +52,18 @@ import PanelHeader from "components/PanelHeader/PanelHeader.js";
 import SearchBar from 'components/SearchBar/SearchBar';
 
 function SearchResult() {
-
     const [newsData, setNewsData] = useState([]);
     const [item, setItem] = useState(null); // item을 상태로 추가
+    const [keywords, setKeywords] = useState([])
     const location = useLocation();
+    const state = location.state
 
     useEffect(() => {
-        const urlParams = new URLSearchParams(location.search);
-        const newItem = urlParams.get("item");
-        setItem(newItem); // 상태 업데이트
-
-        if (newItem) {
+        setItem(state.company)
+        setKeywords(state.keywords)
+        if (state.company) {
             axios
-                .get(A1_API_URL + `/api/searchResult?item=${newItem}`)
+                .get(A1_API_URL + `/api/searchResult?item=${state.company}`)
                 .then((response) => {
                     setNewsData(response.data.items);
                 })
@@ -157,7 +155,7 @@ function SearchResult() {
                                     <CardTitle><b>분석 내용</b></CardTitle>
                                 </CardHeader>
                                 <CardBody>
-                                    <WordCloudComponent words={words} />
+                                    <WordCloudComponent words={keywords} />
                                 </CardBody>
                             </Card>
                         </Col>

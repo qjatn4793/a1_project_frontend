@@ -106,11 +106,11 @@ const SearchBar = () => {
         formData.append('file', file);
 
         // 서버에 POST 요청 보내기
-        axios.post(A1_API_URL + `/fileUpload/searchItem`, formData)
+        axios.post(A1_API_URL + `/api/searchItem`, formData)
             .then((response) => {
-                console.log('서버 응답:', response.data);
+                console.log('서버 응답:', response.data.data);
 
-                setItemDetails(response.data);
+                navigate(`/a1_bot/searchFileResult`, { state: response.data.data });
             })
             .catch((error) => {
                 console.error('서버 업로드 오류:', error);
