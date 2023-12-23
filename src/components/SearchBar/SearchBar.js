@@ -106,7 +106,7 @@ const SearchBar = () => {
         formData.append('file', file);
 
         // 서버에 POST 요청 보내기
-        axios.post(A1_API_URL + `/fileUpload/searchItem`, formData)
+        axios.post(A1_API_URL + `/file/uploadFile`, formData)
             .then((response) => {
                 console.log('서버 응답:', response.data);
 
