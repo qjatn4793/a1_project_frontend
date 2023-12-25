@@ -155,7 +155,7 @@ const SearchBar = () => {
         if (selectedOption != "선택되지 않음") {
             setSelectedOption(selectedOption);
         } else {
-            return;
+            setSelectedOption("");
         }
     };
 
@@ -293,10 +293,10 @@ const SearchBar = () => {
                             </InputGroupAddon>
                         </InputGroup>
 
-                        <div className="d-flex align-items-center justify-content-center">
+                        <div className="d-flex align-items-center justify-content-center" style={{color : "#ffffff"}}>
                             추천 검색어 :
                             {suggestedTerms.map((term, index) => (
-                                <Button key={index} outline style={{ color: "black", borderColor: "gray", borderRadius: "17px" }} className="ml-2" onMouseDown={() => handleSuggestionClick(term)}>
+                                <Button key={index} outline className="ml-2 btn-primary" onMouseDown={() => handleSuggestionClick(term)}>
                                     {term}
                                 </Button>
                             ))}
@@ -355,8 +355,8 @@ const SearchBar = () => {
                                     <option value="콜봇">콜봇</option>
                                     <option value="메시징서비스">메시징서비스</option>
                                 </select>
-                                <Button color="warning" onClick={handleClick} style={{ padding: "10px 0px 10px 0px" }}>
-                                    <span style={{ color: "black" }}>검색 결과 확인</span>
+                                <Button color="warning" onClick={handleClick} style={{ padding: "10px 10px 10px 10px" }}>
+                                    <span style={{ color: "black" }}>결과 확인</span>
                                 </Button>
                             </td>
                         </tr>

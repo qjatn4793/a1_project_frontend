@@ -21,12 +21,14 @@ import {
 } from "reactstrap";
 
 const WordCloudComponent = ({ keywords }) => {
+
     const options = {
         rotations: 0, // 각 단어당 회전 수
         rotationAngles: [0, 90], // 가능한 회전 각도 (도 단위)
-        fontSizes: [60, 60], // 폰트 크기 범위
+        fontSizes: [30, 60], // 폰트 크기 범위
         scale: 'linear', // 폰트 크기의 스케일링 방법 ('linear', 'sqrt', 또는 'log')
         spiral: 'rectangular', // 나선형의 형태 ('archimedean' 또는 'rectangular')
+        padding: 10
     };
 
     return (
