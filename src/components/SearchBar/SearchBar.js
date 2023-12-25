@@ -61,6 +61,9 @@ const SearchBar = () => {
     const fetchItemDetails = (selectedItem) => {
         axios.get(A1_API_URL + `/api/searchItem?item=${selectedItem}`)
             .then((response) => {
+
+                console.log(response);
+
                 setItemDetails(response.data);
             })
             .catch((error) => {
@@ -108,9 +111,9 @@ const SearchBar = () => {
         // 서버에 POST 요청 보내기
         axios.post(A1_API_URL + `/file/uploadFile`, formData)
             .then((response) => {
-                console.log('서버 응답:', response.data.data);
+                console.log('서버 응답:', response.data);
 
-                navigate(`/a1_bot/searchFileResult`, { state: response.data.data });
+                navigate(`/a1_bot/searchFileResult`, { state: response.data });
             })
             .catch((error) => {
                 console.error('서버 업로드 오류:', error);
@@ -170,7 +173,8 @@ const SearchBar = () => {
             // 파일 형식인 경우
             navigate(`/a1_bot/searchFileResult?item=${itemDetails} + ${selectedOption}`);
         } else {
-            // 파일 형식이 아닌 경우
+            console.log(itemDetails);
+
             navigate(`/a1_bot/searchResult?item=${itemDetails} + ${selectedOption}`);
         }
     };

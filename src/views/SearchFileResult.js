@@ -54,16 +54,20 @@ import SearchBar from 'components/SearchBar/SearchBar';
 function SearchResult() {
     const [newsData, setNewsData] = useState([]);
     const [item, setItem] = useState(null); // item을 상태로 추가
-    const [keywords, setKeywords] = useState([])
+    const [keywords, setKeywords] = useState([]);
+    const [mainData, setMainData] = useState([]);
+    const [fileName, setfileName] = useState([]);
     const location = useLocation();
-    const state = location.state
+    const state = location.state;
 
     useEffect(() => {
-        setItem(state.company)
-        setKeywords(state.keywords)
-        if (state.company) {
+        setItem(state.data.company);
+        setKeywords(state.data.keywords);
+        setMainData(state.data.evaluationStandard);
+        setfileName(state.data.fileName);
+        if (state.data.company && state.data.evaluationStandard) {
             axios
-                .get(A1_API_URL + `/api/searchResult?item=${state.company}`)
+                .get(A1_API_URL + `/api/searchResult?item=${state.data.company} aicc`)
                 .then((response) => {
                     setNewsData(response.data.items);
                 })
@@ -71,7 +75,7 @@ function SearchResult() {
                     console.error("Axios 오류:", error);
                 });
         }
-    }, [location]);
+    }, [state, location]);
 
     const notificationAlert = React.useRef();
     const golink = (url) => {
@@ -127,7 +131,11 @@ function SearchResult() {
 
     const handleFileDown = async () => {
         try {
-            const response = await axios.get(A1_API_URL + `/file/downloadFile`, {
+            const newsTitles = newsData.map(newsItem => newsItem.title).join("\n");
+
+            const encodedData = encodeURIComponent(mainData + "\n5.주요뉴스기사\n" + newsTitles);
+
+            const response = await axios.get(A1_API_URL + `/file/downloadFile?contents=${encodedData}`, {
                 responseType: 'blob',
             });
 
@@ -162,18 +170,128 @@ function SearchResult() {
                     }
                 />
                 <div className="header text-center" style={{ backgroundColor: "#ffffff" }}>
-                    <h4 className="title" style={{ color: "black", borderTop: "1px solid #C1C1C1", paddingTop: "15px", paddingBottom: "15px", marginTop: "0px" }}><b style={{ color: "#fa7a50" }}>{item}</b> 검색결과</h4>
+                    <h4 className="title" style={{ color: "black", borderTop: "1px solid #C1C1C1", paddingTop: "15px", paddingBottom: "15px", marginTop: "0px" }}><b style={{ color: "#fa7a50" }}>{fileName}</b> 분석결과</h4>
                 </div>
                 <div className="content">
                     <NotificationAlert ref={notificationAlert} />
                     <Row>
-                        <Col md={6} xs={12} className='d-flex align-items-stretch'>
+                        <Col md={6} xs={12}>
                             <Card style={{ borderRadius: "25px" }}>
                                 <CardHeader>
                                     <CardTitle><b>분석 내용</b></CardTitle>
                                 </CardHeader>
                                 <CardBody>
-                                    <WordCloudComponent words={keywords} />
+                                    {/* <WordCloudComponent words={keywords} /> */}
+                                    <p style={{ color: "black" }}>
+                                        {mainData && mainData.includes('\n') ? (
+                                            <p style={{ color: "black" }}>
+                                                {mainData.split('\n').map((text, index) => (
+                                                    <React.Fragment key={index}>
+                                                        {index > 0 && <br />} {/* 첫 번째 줄 이후에 <br> 태그 추가 */}
+                                                        {text}
+                                                    </React.Fragment>
+                                                ))}
+                                            </p>
+                                        ) : (
+                                            <p style={{ color: "black" }}>{mainData}</p>
+                                        )}
+                                    </p>
+                                </CardBody>
+                            </Card>
+                            <Card style={{ borderRadius: "25px" }}>
+                                <CardHeader>
+                                    <CardTitle><b>키워드 트랜드 변화</b></CardTitle>
+                                </CardHeader>
+                                <CardBody>
+                                    <Row>
+                                        <Col md={4} xs={12}>
+                                            <Card style={{ borderRadius: "25px" }}>
+                                                <CardHeader>
+                                                    <CardTitle style={{ color: "#FF5C00" }}><b>6개월 전</b></CardTitle>
+                                                </CardHeader>
+                                                <CardBody>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>1. 생성형 AI</b>
+                                                        <b style={{ color: "gray" }}>343건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>2. GPT 4.0</b>
+                                                        <b style={{ color: "gray" }}>121건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>3. LLM</b>
+                                                        <b style={{ color: "gray" }}>96건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>4. 언어처리기술</b>
+                                                        <b style={{ color: "gray" }}>32건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>5. AI 솔루션</b>
+                                                        <b style={{ color: "gray" }}>11건</b>
+                                                    </div>
+                                                </CardBody>
+                                            </Card>
+                                        </Col>
+                                        <Col md={4} xs={12}>
+                                            <Card style={{ borderRadius: "25px" }}>
+                                                <CardHeader>
+                                                    <CardTitle style={{ color: "#FF5C00" }}><b>3개월 전</b></CardTitle>
+                                                </CardHeader>
+                                                <CardBody>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>1. 생성형 AI</b>
+                                                        <b style={{ color: "gray" }}>443건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>2. GPT 4.0</b>
+                                                        <b style={{ color: "gray" }}>221건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>3. LLM</b>
+                                                        <b style={{ color: "gray" }}>125건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>4. 언어처리기술</b>
+                                                        <b style={{ color: "gray" }}>42건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>5. AI 솔루션</b>
+                                                        <b style={{ color: "gray" }}>21건</b>
+                                                    </div>
+                                                </CardBody>
+                                            </Card>
+                                        </Col>
+                                        <Col md={4} xs={12}>
+                                            <Card style={{ borderRadius: "25px" }}>
+                                                <CardHeader>
+                                                    <CardTitle style={{ color: "#FF5C00" }}><b>오늘</b></CardTitle>
+                                                </CardHeader>
+                                                <CardBody>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>1. 생성형 AI</b>
+                                                        <b style={{ color: "gray" }}>493건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>2. GPT 4.0</b>
+                                                        <b style={{ color: "gray" }}>276건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>3. LLM</b>
+                                                        <b style={{ color: "gray" }}>149건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>4. 언어처리기술</b>
+                                                        <b style={{ color: "gray" }}>56건</b>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                                        <b style={{ color: "black" }}>5. AI 솔루션</b>
+                                                        <b style={{ color: "gray" }}>38건</b>
+                                                    </div>
+                                                </CardBody>
+                                            </Card>
+                                        </Col>
+                                    </Row>
                                 </CardBody>
                             </Card>
                         </Col>
@@ -181,7 +299,7 @@ function SearchResult() {
                             <Card style={{ borderRadius: "25px" }}>
                                 <CardHeader>
                                     <CardTitle className="d-flex justify-content-between align-items-center">
-                                        <b>요구사항 추출</b>
+                                        <b>주요 뉴스기사</b>
                                         <Button color="warning" style={{ margin: 0 }} onClick={handleFileDown}>
                                             <span>
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -20,7 +20,7 @@ import {
     CardText,
 } from "reactstrap";
 
-const WordCloudComponent = ({ words }) => {
+const WordCloudComponent = ({ keywords }) => {
     const options = {
         rotations: 0, // 각 단어당 회전 수
         rotationAngles: [0, 90], // 가능한 회전 각도 (도 단위)
@@ -31,11 +31,12 @@ const WordCloudComponent = ({ words }) => {
 
     return (
         <div style={{ width: '100%', height: '400px' }}>
-            <ReactWordcloud words={words} options={options} />
+            <ReactWordcloud words={keywords} options={options} />
         </div>
     );
 };
 
+/*
 const words = [
     { text: 'React', value: 10 },
     { text: 'JavaScript', value: 8 },
@@ -48,6 +49,7 @@ const words = [
     { text: 'Babel', value: 1 },
     { text: 'Express.js', value: 9 },
 ];
+*/
 
 
 // core components
@@ -59,8 +61,13 @@ function SearchResult() {
     const [newsData, setNewsData] = useState([]);
     const [item, setItem] = useState(null); // item을 상태로 추가
     const location = useLocation();
+    const state = location.state;
+    const [keywords, setKeywords] = useState([]);
 
     useEffect(() => {
+
+        console.log(state);
+
         const urlParams = new URLSearchParams(location.search);
         const newItem = urlParams.get("item");
         setItem(newItem); // 상태 업데이트
@@ -70,6 +77,7 @@ function SearchResult() {
                 .get(A1_API_URL + `/api/searchResult?item=${newItem}`)
                 .then((response) => {
                     setNewsData(response.data.items);
+                    setKeywords(response.data.keywords);
                 })
                 .catch((error) => {
                     console.error("Axios 오류:", error);
@@ -157,7 +165,7 @@ function SearchResult() {
                                     <CardTitle><b>핵심 키워드</b></CardTitle>
                                 </CardHeader>
                                 <CardBody>
-                                    <WordCloudComponent words={words} />
+                                    <WordCloudComponent keywords={keywords} />
                                 </CardBody>
                             </Card>
                             <Card style={{ borderRadius: "25px" }}>
