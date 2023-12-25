@@ -182,10 +182,10 @@ const SearchBar = () => {
     // 추천 검색어를 설정하는 함수
     const updateSuggestedTerms = () => {
         const allTerms = [
-            "농협", "SKB", "KT", "LG", "KB증권", "Kakao", "카카오", "Naver", "네이버", "Samsung", "삼성",
-            "Samsung SDS", "삼성 SDS", "SK Telecom", "LG 일렉트로닉스", "쿠팡", "우아한 형제들", "라인",
+            "농협", "SK", "SKB", "KT", "LG", "KB증권", "Kakao", "카카오", "Naver", "네이버", "Samsung", "삼성",
+            "Samsung SDS", "삼성 SDS", "SK 텔레콤", "쿠팡", "우아한 형제들", "라인",
             "왓챠", "직방", "야놀자", "인포뱅크", "Infobank", "잔디", "배달의민족", "토스", "마켓컬리",
-            "지그재그", "KIA", "기아", "현대", "Hyundai", "LG CNS", "야나두"
+            "지그재그", "KIA", "기아", "현대", "LG CNS", "야나두"
         ];
         const randomTerms = allTerms.sort(() => 0.5 - Math.random()).slice(0, 3);
         setSuggestedTerms(randomTerms);
