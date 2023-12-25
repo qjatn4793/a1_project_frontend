@@ -90,3 +90,17 @@
         transform: rotate(360deg);
     }
 }
+
+@media (max-width: 768px) {
+    .hide-on-mobile {
+        display: none !important;
+    }
+
+    .hide-on-searchBar {
+        flex-wrap: nowrap !important;
+    }
+
+    .hide-on-pdt17 {
+        padding-top: 17px !important;
+    }
+}

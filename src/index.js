@@ -31,7 +31,7 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/*" element={<AdminLayout />} />
-      <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      <Route path="*" element={<Navigate to="/a1_bot/dashboard" replace />} />
     </Routes>
   </BrowserRouter>
 );

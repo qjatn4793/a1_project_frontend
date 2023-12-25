@@ -161,9 +161,9 @@ function SearchResult() {
             <div className="main-panel">
                 <PanelHeader style={{ background: "#ffffff" }}
                     content={
-                        <Row>
+                        <Row className='hide-on-searchBar'>
                             <a href="/a1_bot/dashboard" className="title ml-5" style={{ color: "black", paddingTop: "20px", marginBottom: "15px" }}><h3><b style={{ color: "#fa7a50" }}>A1</b></h3></a>
-                            <div style={{ paddingTop: "12px", width: "90%" }}>
+                            <div style={{ paddingTop: "12px", width: "90%" }} className='hide-on-pdt17'>
                                 <SearchBar></SearchBar>
                             </div>
                         </Row>

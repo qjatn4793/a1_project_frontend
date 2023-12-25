@@ -241,10 +241,10 @@ const SearchBar = () => {
                                 />
                             </InputGroupText>
                         </InputGroupAddon>
-                        <div className="ml-3">
+                        <div className="ml-3 hide-on-mobile">
                             추천 검색어 :
                             {suggestedTerms.map((term, index) => (
-                                <Button key={index} outline style={{ color: "black", borderColor: "gray", borderRadius: "17px" }} className="ml-2" onMouseDown={() => handleSuggestionClick(term)}>
+                                <Button key={index} outline style={{ borderColor: "gray", color: "black", borderRadius: "17px" }} className="ml-2 btn-primary" onMouseDown={() => handleSuggestionClick(term)}>
                                     {term}
                                 </Button>
                             ))}
@@ -293,10 +293,10 @@ const SearchBar = () => {
                             </InputGroupAddon>
                         </InputGroup>
 
-                        <div className="d-flex align-items-center justify-content-center" style={{color : "#ffffff"}}>
+                        <div className="d-flex align-items-center justify-content-center hide-on-mobile" style={{color : "#ffffff"}}>
                             추천 검색어 :
                             {suggestedTerms.map((term, index) => (
-                                <Button key={index} outline className="ml-2 btn-primary" onMouseDown={() => handleSuggestionClick(term)}>
+                                <Button key={index} outline style={{ borderRadius: "17px" }} className="ml-2 btn-primary" onMouseDown={() => handleSuggestionClick(term)}>
                                     {term}
                                 </Button>
                             ))}
